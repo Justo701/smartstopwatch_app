@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+</head>
+<body>
+    <h1>Stopwatch with Speed Calculation</h1>
+    <form action="/set_distance" method="post">
+        <label for="distance">Set Distance (in meters): </label>
+        <input type="number" name="distance" required>
+        <button type="submit">Set Distance</button>
+    </form>
+    <br>
+    <button id="startButton">Start</button>
+    <button id="stopButton">Stop</button>
+    <p id="result"></p>
+
+    <script>
+        document.getElementById('startButton').addEventListener('click', function () {
+            fetch('/start', { method: 'POST' });
+        });
+
+        document.getElementById('stopButton').addEventListener('click', function () {
+            fetch('/stop', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('result').innerText = `Time: ${data.time.toFixed(2)} seconds, Speed: ${data.speed.toFixed(2)} m/s`;
+                });
+        });
+    </script>
+</body>
+</html>
+
