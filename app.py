@@ -34,5 +34,4 @@ def calculate_speed(time, distance):
     return distance / time
 
 if __name__ == '__main__':
-    app.run(debug=True)
-
+    app.run(debug=True, host='0.0.0.0')
